@@ -196,9 +196,21 @@ export function useMatchmaking({ fid }: Args) {
       );
 
     channelRef.current = channel;
-    channel.subscribe((status) => {
+    channel.subscribe((status, err) => {
       if (process.env.NEXT_PUBLIC_MATCH_DEBUG === "true") {
-        console.log("[Matchmaking] Realtime subscription status:", status);
+        console.log("[Matchmaking] Realtime subscription status:", status, err);
+      }
+      
+      // Log errors and failed subscriptions
+      if (status === "SUBSCRIBED") {
+        if (process.env.NEXT_PUBLIC_MATCH_DEBUG === "true") {
+          console.log("[Matchmaking] Realtime subscription successful");
+        }
+      } else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT" || status === "CLOSED") {
+        console.error("[Matchmaking] Realtime subscription failed:", status, err);
+        // Realtime failed, polling will handle updates
+      } else if (status === "SUBSCRIBE_ERROR") {
+        console.error("[Matchmaking] Realtime subscription error:", status, err);
       }
     });
 
@@ -279,7 +291,8 @@ export function useMatchmaking({ fid }: Args) {
     };
 
     fetchQueueStatus();
-    const interval = window.setInterval(fetchQueueStatus, 1500);
+    // Poll more frequently to catch missed Realtime updates
+    const interval = window.setInterval(fetchQueueStatus, 800);
 
     return () => {
       cancelled = true;
@@ -303,9 +316,21 @@ export function useMatchmaking({ fid }: Args) {
       .on(
         "postgres_changes",
         { event: "UPDATE", schema: "public", table: "game_sessions", filter: `id=eq.${sessionId}` },
-        (payload) => setSession(payload.new as GameSessionRow),
+        (payload) => {
+          if (process.env.NEXT_PUBLIC_MATCH_DEBUG === "true") {
+            console.log("[Matchmaking] Session Realtime UPDATE received:", payload);
+          }
+          setSession(payload.new as GameSessionRow);
+        },
       )
-      .subscribe();
+      .subscribe((status, err) => {
+        if (process.env.NEXT_PUBLIC_MATCH_DEBUG === "true") {
+          console.log("[Matchmaking] Session Realtime subscription status:", status, err);
+        }
+        if (status !== "SUBSCRIBED") {
+          console.warn("[Matchmaking] Session Realtime subscription not successful:", status, err);
+        }
+      });
 
     return () => {
       supabase.removeChannel(channel);
