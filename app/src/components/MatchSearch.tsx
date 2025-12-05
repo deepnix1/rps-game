@@ -23,10 +23,21 @@ export function MatchSearch({
   overlayStage = "hidden",
   countdownValue = 5,
 }: MatchSearchProps) {
-  // Show overlay if overlayStage is set (animation triggered) OR if we have a match
-  // This ensures animations play even if there's a slight delay in isMatched prop
-  const showOverlay = overlayStage !== "hidden" || (isMatched && overlayStage === "hidden");
-  const isMatchReady = isMatched || overlayStage !== "hidden"; // Use overlayStage as fallback
+  // Show overlay if overlayStage is set (animation triggered)
+  // overlayStage is only set when we have a confirmed match, so we can trust it
+  const showOverlay = overlayStage !== "hidden";
+  const isMatchReady = isMatched || overlayStage !== "hidden"; // Use overlayStage as fallback for UI state
+
+  // Debug logging
+  if (process.env.NEXT_PUBLIC_MATCH_DEBUG === "true") {
+    console.log("[MatchSearch] Render:", {
+      overlayStage,
+      isMatched,
+      showOverlay,
+      isMatchReady,
+      countdownValue,
+    });
+  }
 
   return (
     <div className="relative flex h-auto min-h-screen w-full flex-col bg-[#101018]">

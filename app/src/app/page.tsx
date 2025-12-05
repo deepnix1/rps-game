@@ -180,6 +180,16 @@ export default function Home() {
     const isQueueOrIdle = matchmaking.phase === "idle" || matchmaking.phase === "queueing";
     const isMatched = matchmaking.phase === "matched" && currentSessionId !== null;
 
+    if (matchDebugEnabled) {
+      console.log("[MatchAnimation] Trigger check:", {
+        phase: matchmaking.phase,
+        sessionId: currentSessionId,
+        isMatched,
+        currentStage: matchIntroStage,
+        previousSessionId: previousSessionIdRef.current,
+      });
+    }
+
     // Only trigger overlay if we have a real session AND phase is matched
     if (!isMatched || !currentSessionId) {
       previousSessionIdRef.current = null;
@@ -196,13 +206,20 @@ export default function Home() {
     if (previousSessionIdRef.current === currentSessionId) {
       // But ensure overlay is shown if it was hidden
       if (matchIntroStage === "hidden") {
+        if (matchDebugEnabled) {
+          console.log("[MatchAnimation] Re-triggering animation for same session");
+        }
         setMatchIntroStage("match_found");
         setCountdownValue(5);
+        setForceMatchSearch(true);
       }
       return;
     }
 
     // Only now trigger the match found animation
+    if (matchDebugEnabled) {
+      console.log("[MatchAnimation] Triggering match found animation!");
+    }
     previousSessionIdRef.current = currentSessionId;
     setCountdownComplete(false);
     setForceMatchSearch(true);
