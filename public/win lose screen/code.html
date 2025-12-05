@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Results Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": {
+                DEFAULT: "#e62243",
+                light: "#ff4d6d"
+              },
+              "background": "#121212",
+              "surface": "#1e1e1e",
+              "win-gold": "#FFD700",
+            },
+            fontFamily: {
+              "display": ["Teko", "sans-serif"],
+              "body": ["Noto Sans JP", "sans-serif"],
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style type="text/tailwindcss">
+      @layer utilities {
+        .text-shadow-red {
+          text-shadow: 0 0 10px theme('colors.primary.DEFAULT'), 0 0 20px theme('colors.primary.light');
+        }
+        .box-shadow-win {
+           box-shadow: 0 0 15px 3px theme('colors.win-gold'), inset 0 0 10px 2px theme('colors.win-gold / 0.5');
+        }
+        .box-shadow-lose {
+            box-shadow: 0 0 8px 1px #4a4a4a;
+        }
+        .brush-stroke-bg {
+          position: relative;
+        }
+        .brush-stroke-bg::before {
+          content: '勝利';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-family: 'Noto Sans JP', sans-serif;
+          font-weight: 700;
+          font-size: 15rem;
+          color: theme('colors.surface / 0.5');
+          z-index: 1;
+          opacity: 0.1;
+          pointer-events: none;
+        }
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-white">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden p-6 pt-16">
+<div class="brush-stroke-bg relative z-10 flex flex-grow flex-col">
+<div class="text-center mb-8">
+<h1 class="font-display text-8xl font-bold uppercase tracking-widest text-shadow-red">YOU WIN</h1>
+<p class="mt-1 text-lg font-medium text-win-gold">勝利</p>
+</div>
+<div class="mb-10 text-center">
+<p class="text-lg uppercase tracking-wider text-white/60">Final Score</p>
+<p class="font-display text-5xl font-semibold text-white">5 - 3</p>
+</div>
+<div class="grid grid-cols-2 gap-5 mb-10">
+<div class="flex flex-col items-center gap-3">
+<div class="relative w-full aspect-square">
+<div class="absolute inset-0 z-10 rounded-lg border-2 border-win-gold box-shadow-win"></div>
+<div class="w-full h-full bg-center bg-no-repeat bg-cover rounded-lg" data-alt="A stylized glowing blue fist representing 'Rock'" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAUK4LnheUeiNR52A3NSA25IayNkGgRn8kH5ZpOFCc-qMzu5stqNDND2Fs9YTAlt2KmLOwWtjYLSHy2L1qt2Oj0OXtlkijnErVgcOaFe_Dbvp0WYI69dbSBFEE9UNP0tL6L3qaCCM4Gc9bAPlO1isndfuXK801JjaK3j11JNbbbra8q0xKwr7L2qmqQ9gvZPKx_mvpK8yUyUCtxKeCxGiVG3xRV3TaeL4t31s_R65xh1_anyT_r04AAkxmhoNVU8afMmtScoH7boU4");'></div>
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-win-gold px-3 py-0.5">
+<p class="text-xs font-bold uppercase text-black">WIN</p>
+</div>
+</div>
+<div class="text-center">
+<p class="font-bold text-white">Your Rock</p>
+<p class="text-sm text-white/70">あなたの岩</p>
+</div>
+</div>
+<div class="flex flex-col items-center gap-3 opacity-60">
+<div class="relative w-full aspect-square">
+<div class="absolute inset-0 z-10 rounded-lg border-2 border-gray-600 box-shadow-lose"></div>
+<div class="w-full h-full bg-center bg-no-repeat bg-cover rounded-lg" data-alt="A stylized red open hand with two fingers extended representing 'Scissors'" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBi7IEg82K6khVFHq7Z0LmBDgdQSPiDHj10zqCLIPqiF4tvZgokx_a3pRLyFv9NwsIW-dWI3y4YJ5cvl2CcEyStD23Hsm-HUfhP7GaBpoaPkZQLbGvO-i7fqPATv_-fEDn4LCC7CtW7NNCuGuT0ctULkAApR_5vLiG2YWbEeMkrWcsVowBZXMPhTZmko7zMlcJzyMdCFpSelilmeg-bBopFToV9IshKX7MzGJf8reExCwptva0d-DWcBRREEYzeofYsMEybjkLSzHk");'></div>
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gray-600 px-3 py-0.5">
+<p class="text-xs font-bold uppercase text-white/80">LOSE</p>
+</div>
+</div>
+<div class="text-center">
+<p class="font-bold text-white/80">Opponent's Scissors</p>
+<p class="text-sm text-white/50">相手の鋏</p>
+</div>
+</div>
+</div>
+<div class="flex-grow"></div>
+<div class="flex w-full flex-col items-center gap-4">
+<button class="flex w-full max-w-sm cursor-pointer items-center justify-center gap-2.5 rounded-lg h-16 bg-primary px-5 text-xl font-bold uppercase tracking-widest text-white shadow-[0_4px_15px_rgba(230,34,67,0.4)] transition-transform hover:scale-105 active:scale-100">
+<span class="material-symbols-outlined text-2xl">replay</span>
+<span>Rematch</span>
+</button>
+<button class="flex w-full max-w-sm cursor-pointer items-center justify-center gap-2.5 rounded-lg h-16 bg-transparent px-5 text-lg font-semibold uppercase tracking-wider text-white/70 ring-1 ring-white/30 transition-colors hover:bg-white/10 hover:text-white">
+<span class="material-symbols-outlined text-2xl">menu</span>
+<span>Main Menu</span>
+</button>
+</div>
+</div>
+</div>
+
+</body></html>

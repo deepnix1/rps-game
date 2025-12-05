@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bet Selection Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+      font-size: 24px;
+    }
+    .selected-shadow {
+        box-shadow: 0 0 15px 2px #E6007A, 0 0 5px 1px #E6007A inset;
+    }
+    .footer-shadow {
+        box-shadow: 0 -5px 30px rgba(230, 0, 122, 0.3);
+    }
+    .bet-card-clip {
+        clip-path: polygon(0% 12px, 12px 0%, 100% 0%, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0% 100%);
+    }
+    .button-clip {
+        clip-path: polygon(0% 12px, 12px 0%, 100% 0%, 100% 100%, 12px 100%, 0% calc(100% - 12px));
+    }
+    .balance-clip {
+        clip-path: polygon(0% 0%, calc(100% - 12px) 0%, 100% 12px, 100% 100%, 0% 100%);
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#E6007A",
+            "background-light": "#f5f7f8",
+            "background-dark": "#101018",
+          },
+          fontFamily: {
+            "display": ["Space Grotesk", "sans-serif"],
+            "body": ["Noto Sans JP", "sans-serif"],
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark font-body">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-dark text-white group/design-root overflow-x-hidden">
+<header class="sticky top-0 z-10 flex items-center justify-between p-4 pb-2">
+<button class="flex size-10 shrink-0 items-center justify-center rounded-lg border border-white/20 bg-white/10 text-white/80 transition-colors hover:bg-white/20 active:bg-white/30">
+<span class="material-symbols-outlined !text-2xl">arrow_back_ios_new</span>
+</button>
+<div class="balance-clip flex items-center justify-center rounded-lg border border-white/20 bg-white/10 px-4 py-2">
+<h2 class="text-base font-bold leading-tight tracking-[-0.015em] text-white/90">残高: $1,250</h2>
+</div>
+<div class="size-10 shrink-0"></div> 
+</header>
+<main class="flex-1 flex flex-col">
+<div class="px-4 text-center pb-3 pt-6">
+<h1 class="font-display text-white text-[32px] font-bold leading-tight tracking-tighter">ベットを選択</h1>
+<p class="text-white/70 text-sm">SELECT YOUR WAGER</p>
+</div>
+<div class="grid grid-cols-2 gap-3 p-4">
+<div class="bet-card-clip flex cursor-pointer flex-col gap-2 rounded-lg border border-primary bg-primary/20 p-4 items-center justify-center transform transition-transform hover:scale-105 active:scale-95 selected-shadow">
+<img alt="Yen Coin" class="h-8 w-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBijZrqb2YFYVpCU3xUUqvRB1rDjDdZZU2-9WCES-CYWEVT2oml7HxMewr-MH3D0jsxGS-_7G5kZLMWf45f9ZG98JIk3jLZdcvNckqFwzxWKuLQZEwwalLBV2mh5XeIqzO2Orwf3rrY6B0k34jZhwyNbPVbG0PpwaV0XkkYR1iuNnDQGK3xJLTm1TpOw5uhpXkOlRVxDFK0tLQE7GPMPKS-Nu9BZ7A1078xXqlLZxNXHlAsJMSYHjgCNALESDnkEEm5xyHKwZKjADI"/>
+<span class="text-white font-display text-2xl font-bold leading-tight">$5</span>
+</div>
+<div class="bet-card-clip flex cursor-pointer flex-col gap-2 rounded-lg border border-white/20 bg-white/5 p-4 items-center justify-center transform transition-transform hover:scale-105 hover:border-primary active:scale-95">
+<img alt="Yen Coin" class="h-8 w-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcrWZMb8gitLcxLPaCmlSTvicENLHEte25OrWfHlBfQxB8v05JduxHpRvHgI1qrrSg01zMJnCTKPVtRwvnCO0blbDBJESZUS2zu5IzTvSfhvg0_BfeklNCl58oVdGplaO9sFII6yS-iJBBqybURE-kABC_LyRvwjM-sM8RJKoeCatOIjSSZmEX5V9hCRfoESbQZddWUXN73ZEIrPsQhl9FvnI1WkQj4gsEvErPUEnDTnKV0ZnOzaZ6f6ZLFtszKq6pCOZ0t4-oK7c"/>
+<span class="text-white font-display text-2xl font-bold leading-tight">$10</span>
+</div>
+<div class="bet-card-clip flex cursor-pointer flex-col gap-2 rounded-lg border border-white/20 bg-white/5 p-4 items-center justify-center transform transition-transform hover:scale-105 hover:border-primary active:scale-95">
+<img alt="Yen Coin" class="h-8 w-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA939Uksgd_io7ClS1tOU8ypj8v-WM5CqPKmhR_h-aXK9HcM-o_rTda1n4-5EGiLNnLGt8jjbrMnggcdRD25CD8qN9TVLYzaGvFTA1dDOFua7zm1OsJ3hRdlH_9vDeQR2opKOPe1e5yyTNKUoRGBnybZKxMGSyTagXkihSNSzAq9LHiV97Zlo_NHPUkFQnqsqfm6skbMiN0qX-knlT06ggPtBQqM2j0zGMQFWBSC2qKxWmSPmzA8F4PUWbEwyKTqpiXlZIODcqAsT4"/>
+<span class="text-white font-display text-2xl font-bold leading-tight">$25</span>
+</div>
+<div class="bet-card-clip flex cursor-pointer flex-col gap-2 rounded-lg border border-white/20 bg-white/5 p-4 items-center justify-center transform transition-transform hover:scale-105 hover:border-primary active:scale-95">
+<img alt="Yen Coin" class="h-8 w-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDF28KepPHA0yy2H1Uva6DeUUpw-RmTYBA86b8wn5nNeK1V_ynzOB2tLaOCzkIzSc_656Y9fdD4uspgej-qA4P5RBMA3s3f6A44OzEyDbVeQQifmEULhhbrscRLRxMoA4kjuPZSyusYBn3tSoIhogX7K0LH5tEoscNxkko25Z_i6qmWCNAxkvrryY-G-FpxC9dV6XFyb33HoPLSjTDqnT_OBnt9ywh_4YyopH8RD-XmHlsoT_V_N5FVdsKhcitVDREe5p-dt8zg7I"/>
+<span class="text-white font-display text-2xl font-bold leading-tight">$50</span>
+</div>
+<div class="bet-card-clip flex cursor-pointer flex-col gap-2 rounded-lg border border-white/20 bg-white/5 p-4 items-center justify-center transform transition-transform hover:scale-105 hover:border-primary active:scale-95">
+<img alt="Yen Coin" class="h-8 w-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYSFdKpw7gmEEJOEfCRxybYFQmz25iDcG1Rgt5FUjlwrJ-yL7k7yU9fUEwz4exI6A2C2L843seQqwe3G4-wq3YcvRPSedsjshF1tMB5IpG5SB4rqaGDAuq4r1pqo1KcmmqDPOoLPdtlO_EtJpooWdOI4WxtYzWvmjqYc_eo5VKi5ZyTRY59Yi77P1M0v_pZE0VbT6cp1nInk_F4cDiYMsSiWIttz0FgU5DXg_LnhkqE4eMPZUmSL86ojEOlwevVgIEJKXu4jMLSTw"/>
+<span class="text-white font-display text-2xl font-bold leading-tight">$100</span>
+</div>
+<div class="bet-card-clip flex cursor-pointer flex-col gap-2 rounded-lg border border-white/20 bg-white/5 p-4 items-center justify-center transform transition-transform hover:scale-105 hover:border-primary active:scale-95">
+<img alt="Yen Coin" class="h-8 w-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOVhCr7h_DpermRV-24h9uHRjrPY7Z2z00HtQNLjhqqXslOB2V6N_fFuIhI9ZeLJGMzLzHWXnlchbYd05nCCc5Upg9LSyfpf-wxrpF-gRIhQUKu0bo6ITDpbR_spiuCBhA0fTaW-ZBwwjA16FGXBc5Xyh-fQkNTzRSJbkcnewAFdfsznxW9jwXm92tHiQTKA0NemmpKOisoWNm3_HKSp03vaNus40ONbIjbVoE0MlL-3M75oPQuvsElHhak7sxys4z-7AMG7rm3kY"/>
+<span class="text-white font-display text-2xl font-bold leading-tight">$250</span>
+</div>
+<div class="bet-card-clip flex cursor-pointer flex-col gap-2 rounded-lg border border-white/20 bg-white/5 p-4 items-center justify-center transform transition-transform hover:scale-105 hover:border-primary active:scale-95">
+<img alt="Yen Coin" class="h-8 w-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfCFQ6BU-Fn-F1Dt04VdqzL6wP49GyqVNa0qsBTeiONgXDLGe1e0-r5s0FE5KiHJ2ra84sehnuoRLikCsdJJgFjVNcw0d4BnpNasebI_Maqafn-KFUqs-MegSfFZ5T9x5HpblBeRz8Cg8CzHfaJUuJzrHfhDJ4g0QrRgaptQvFtnWDvpF6M2QouuYJ0C7WPz0fcDIECgNDAvvghEbmS8wF1GenT_dMl5UUiYQgMCRN_pFUm8QCaBb2KQHNmIaUsDz1R2OmEUWWAOw"/>
+<span class="text-white font-display text-2xl font-bold leading-tight">$500</span>
+</div>
+<div class="bet-card-clip flex cursor-pointer flex-col gap-2 rounded-lg border border-white/20 bg-white/5 p-4 items-center justify-center transform transition-transform hover:scale-105 hover:border-primary active:scale-95">
+<img alt="Yen Coin" class="h-8 w-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZOlY9e3d-Gv-Yaxej-XLvDZLSTGIArwtjArIwFW541cuR6rGVvRMp_M19HMG_HOOC_hNAC3sFrQZsgfWq1WHVhl57AkftmvQ9LaSErD7CkbZzxegZxcaJAPnDaFdD519Coug4gdgf6XnwUyO7Rw0qtRaGk7TyHFBxG6BqJetQ6e61vH74zNCoycNCnhVq7brIihQUkGSJ-B7FSx32LEMgL-UP7vdMtx8ss6-7TYj0TK2X1ReTF662Gkzmat084DvTd7HsPXNTZBc"/>
+<span class="text-white font-display text-2xl font-bold leading-tight">$1000</span>
+</div>
+</div>
+</main>
+<footer class="sticky bottom-0 bg-background-dark/80 p-4 backdrop-blur-sm footer-shadow">
+<button class="button-clip flex min-w-[84px] w-full max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-5 flex-1 bg-primary text-white text-lg font-bold leading-normal tracking-[0.015em] shadow-[0_0_20px_theme(colors.primary)] transform transition-transform hover:scale-105 active:scale-100 font-display">
+<span class="truncate">ベット ($5)</span>
+</button>
+</footer>
+</div>
+
+</body></html>

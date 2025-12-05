@@ -1,0 +1,13 @@
+{
+  "name": "codex-janken",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.24.0",
+  "scripts": {
+    "dev": "pnpm --filter app dev",
+    "build": "pnpm --filter app build",
+    "start": "pnpm --filter app start",
+    "lint": "pnpm --filter app lint",
+    "test": "pnpm --filter ./... test"
+  }
+}

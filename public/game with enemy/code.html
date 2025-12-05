@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JanKen Game Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#D94F4F",
+            "background-light": "#F3E9E1",
+            "background-dark": "#1A1A1A",
+            "surface-dark": "#2E2E2E",
+            "text-light": "#3D3D3D",
+            "text-dark": "#F0F0F0",
+          },
+          fontFamily: {
+            "display": ["'Noto Sans JP'", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48
+    }
+body {
+    min-height: max(884px, 100dvh);
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuA_jQZlhBVYxuy7207qZziaWSSWUrp3UXt7RIGEyg8ZT95tFJ5k_Wm94Upm1IXtJUlIGaSbeGiCXPZmisM54gRgix1XC2337gpQml_r807c77rg4k09jLT2lE6XtYUAiWsidT1Z97l1dBn4qVigoWupHApD_mQxwpEuxrw_2bZ2N1w8Iv2uvzw82j6k-HHsaRyB_kVTHgIyzWfAfhxjl_dqSBrKLlO_uGFENFWIEV8b_Xvy8py-PEs9pUtDlF_06ac3NO7MPEArn_c)
+    }
+.choice-button {
+    transition: all 0.2s ease-in-out
+    }
+.choice-button.selected {
+    transform: translatey(-8px) scale(1.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-hidden p-4 sm:p-6">
+<div class="flex items-center justify-between pb-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 border-2 border-primary" data-alt="Opponent avatar with oni mask" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQYPym-lY222Z2xHKSJjxaqriggzWltIm06VTxjASXDXCZFJz3Grc5wWX9ilctsvyMFZhoQZkeEBng7P99YC4M_m4IPgXok_wteAuIvWe6xjYyZQbk-TDdv3fYgGPKBt3m8BcS3v4iapTO3aqKu4GaioaSkEIlZzMHG-VxmexTKox2D62i8PoNH7wOGbbNn90Hce1NP8ZGP8hisL78fU7jQjrOuZYKKjp168l4PTYJIHGtpES0N9qlsmhllbzZp8oj6eFweH-lTWE");'></div>
+<div>
+<h2 class="text-sm font-medium opacity-80">対戦相手</h2>
+<p class="text-lg font-bold">鬼武者</p>
+</div>
+</div>
+<button class="flex size-10 items-center justify-center rounded-full bg-black/10 dark:bg-white/10">
+<span class="material-symbols-outlined text-2xl">pause</span>
+</button>
+</div>
+<div class="flex-grow flex flex-col justify-around items-center py-4">
+<div class="flex flex-col items-center gap-2">
+<div class="flex justify-center items-center w-36 h-36 rounded-2xl bg-black/10 dark:bg-surface-dark border-2 border-dashed border-primary/50">
+<span class="material-symbols-outlined text-6xl text-primary opacity-60">question_mark</span>
+</div>
+<p class="text-sm font-medium opacity-60">相手の選択</p>
+</div>
+<div class="text-center">
+<p class="text-sm font-bold tracking-widest text-primary">スコア</p>
+<h1 class="text-6xl font-black leading-none text-text-light dark:text-text-dark">2 – 1</h1>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="flex justify-center items-center w-36 h-36 rounded-2xl bg-black/10 dark:bg-surface-dark border-2 border-dashed border-gray-400/50 dark:border-gray-500/50">
+<span class="material-symbols-outlined text-6xl text-gray-500 opacity-60">front_hand</span>
+</div>
+<p class="text-sm font-medium opacity-60">あなたの選択</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 pt-4 pb-2">
+<p class="text-center text-sm font-bold tracking-widest text-primary">じゃんけんぽん！</p>
+<div class="grid grid-cols-3 gap-3">
+<button class="choice-button flex flex-col items-center justify-center aspect-square rounded-2xl bg-white dark:bg-surface-dark shadow-md">
+<img alt="Rock" class="w-16 h-16" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0oAIEF_rLU-uQXXr3rjbt8tL52ryho3qpNXjZlzMhGfbteXTSqR7jHVdAB3ttD2sONfvzTb--d2TnZRI0e5R2KOD_mVuzCiFLnOmNrK3poKWPPtH6ffyeFw5RmGqviq2r9cWsYWyfIWRpcN4J0yLQKe8I63idavIMdi8_j23OqWRL46-cUaC-EgOVwi0my5racGOW33IQzNJVki0PVe91XNqlqqyvZc6hOIwDQj2jBMR5hewWPAKmzqOUtHxpPvbIip6ir5uQjjs"/>
+<span class="mt-1 font-bold text-sm">グー</span>
+</button>
+<button class="choice-button selected flex flex-col items-center justify-center aspect-square rounded-2xl bg-white dark:bg-surface-dark shadow-lg border-4 border-primary">
+<img alt="Paper" class="w-16 h-16" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAzMZuM26tGQ3cYwAuoVkiwFaJcgPVreFXyp8icfOVqf2TOvVyCFjSbnVCZKNX14OZK0a4v8Y3vNKSym6nJ7gybN8pXf_OcuLt97Zvnx8IdGD7I5FbSr2qUC3JPvYT3iPFLaaZkwAIL14ZojNVn7e3qKWeJVxGQY3EeuAhtNjeDXOf5Lb7feLbLF3QEcxAxXOYsedMnoQJhdLwObKyQZeHrf3RES-7vxglaDD3gpis21wONEi0Gx4Ik5rNN2NwvCRU6SHsQKS0Pgs"/>
+<span class="mt-1 font-bold text-sm">パー</span>
+</button>
+<button class="choice-button flex flex-col items-center justify-center aspect-square rounded-2xl bg-white dark:bg-surface-dark shadow-md">
+<img alt="Scissors" class="w-16 h-16" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZkiIs7i7YsvijmEUZZJgtKIFojkXOVyAN415K2i31AQENm-KTI09TT5RHvUG87hHvO3lWwjDzH94PMgkWcynu4UBUMAR5AfpaE9jUJLLK8vZHoBRf25yK-UUr6pDOY9xKZo7NuIB14MhCX83uED1E9KQu-i4zq3G7f1si3uCJVvFoOZFyYChiYVQTJhR58w0XIWuyo7XhDXh2D9hMSWEwNcWTGS-jQcofARBRH4V95nymzokoOFDNW7p9TJKJWc5TYMjTs-fZTuM"/>
+<span class="mt-1 font-bold text-sm">チョキ</span>
+</button>
+</div>
+</div>
+</div>
+
+</body></html>

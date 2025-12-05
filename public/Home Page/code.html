@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JanKen - Welcome Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#E63946",
+                        "background-light": "#F1FAEE",
+                        "background-dark": "#1D3557",
+                        "accent": "#A8DADC",
+                        "light": "#F1FAEE",
+                    },
+                    fontFamily: {
+                        "display": ["'Noto Sans JP'", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'strong': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
+                        'inner-strong': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.05)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            min-height: max(884px, 100dvh);
+        }
+        .japanese-char {
+            font-size: 8rem;
+            font-weight: 900;
+            line-height: 1;
+            color: #E63946;
+            text-shadow: 
+                -3px -3px 0 #F1FAEE,  
+                 3px -3px 0 #F1FAEE,
+                -3px  3px 0 #F1FAEE,
+                 3px  3px 0 #F1FAEE,
+                 4px 4px 0px #1D3557;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light font-display">
+<div class="relative flex h-screen min-h-screen w-full flex-col items-center justify-between bg-background-light p-6 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-10" data-alt="Stylized image of a red Japanese torii gate against a mountainous backdrop" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPBLm6ipEn6C0e-5pfm1Tqe-jWS94QrPRbKXsz1Lrt4Mlr33Vz62bIPxG8RWXETmrdBDAwKsLW5XPDQ6DCeKB2JGILk8jJ4d2askCR4F54STvtDuYothpkrB0VUETiwnrm0NxjZl9PduprbVPyrSFmeEhiEQneL__mFLbR3LlvAE779NmExy9hM_ufCors5q9yu8fgJ3dOFP19MNrP2oERQF4I9C8QmqeihiyMuZTRmgbMzb_kXjbZyfNlVptRN7lPMiN7imknf-g');"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-background-light/50 via-background-light to-background-light/50"></div>
+<div class="z-10 flex flex-col items-center justify-center flex-grow pt-20 text-center">
+<div class="flex items-center justify-center space-x-2">
+<div class="japanese-char">ジ</div>
+<div class="japanese-char">ャ</div>
+<div class="japanese-char">ン</div>
+</div>
+<h1 class="text-4xl font-bold text-background-dark -mt-2 tracking-wider">JanKen</h1>
+<p class="text-background-dark/70 text-lg mt-1">The Ultimate Showdown</p>
+</div>
+<div class="z-10 w-full max-w-sm pb-8">
+<div class="flex flex-col items-stretch gap-4 px-4">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-5 bg-primary text-light text-lg font-bold leading-normal tracking-wide shadow-strong active:shadow-inner-strong transition-shadow">
+<span class="truncate">START NEW GAME</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-5 bg-accent text-background-dark text-lg font-bold leading-normal tracking-wide shadow-strong active:shadow-inner-strong transition-shadow">
+<span class="truncate">HOW TO PLAY</span>
+</button>
+</div>
+</div>
+</div>
+
+</body></html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Matchmaking Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#1A1A1A", "background-light": "#f7f7f7", "background-dark": "#191919", "accent-gold": "#FFD700"}, fontFamily: {display: "Plus Jakarta Sans"}, borderRadius: {DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px"}}}};</script>
+<style>
+      .pulsating-icon {
+        animation: pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.7;
+          transform: scale(1.05);
+        }
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+    .glowing-border {
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), inset 0 0 10px rgba(255, 215, 0, 0.4);
+      border-color: #FFD700;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<div class="flex items-center p-4">
+<button class="text-gray-600 dark:text-gray-300 flex size-12 shrink-0 items-center justify-center">
+<span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+</button>
+<h2 class="text-gray-800 dark:text-gray-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Match Found!</h2>
+</div>
+<div class="flex flex-1 flex-col justify-between p-4">
+<div class="flex-grow flex flex-col justify-center items-center">
+<div class="grid w-full max-w-sm grid-cols-2 items-center gap-4">
+<div class="flex flex-col gap-3 text-center pb-3">
+<div class="px-4">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full border-2 border-primary" data-alt="User's profile picture showing a stylized avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDmkQz2AjsUQxvjRAjXeqxMQu4tg48BYubJCTp39vqpWHwmn2CdFXx0jG7Sl-9ht5DlVmK_vFxeNBnQIqHZmgB5k6NZ4iq9KUz0UsquWYSBZLyanTsfVlqrfR4Runo_ALSC8Y1seMhddK9UCal5PFwT4-ULbKoMYpk5euIaEdO8hx5deiJDH9Lu1eYMEltkEjQTW7qAXLUS3nP-dsuBXhkfwO_T3WoqlIP8eusf08D_05cLLrLHMY76PdzGtKWN0vYY5BMjViIrGtk");'></div>
+</div>
+<div>
+<p class="text-gray-800 dark:text-white text-base font-medium leading-normal">You</p>
+<p class="text-primary text-sm font-normal leading-normal">Kenshiro</p>
+</div>
+</div>
+<div class="flex flex-col gap-3 text-center pb-3">
+<div class="px-4">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full border-2 border-primary glowing-border" data-alt="Opponent's profile picture showing a fierce samurai avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCS21s7_ZmGSGw_VXngrgel1LA7RMixwqIWh_5RMRIGKiyKUSveYZqDaDYK1lR-LWkjiHYnjsdsmo1RckO696u7AP0hyWQH6fKX22oRu7RTkXCXudwiX3LezsWtAuugZtZXulfjZXzct__PaJI0JqTY_sgmxtamb1WDLwRai8xCiggsSRIjPwJG4gFN8WZe543c6-DZF2RUQQqtMkL0cPEOdnq757ahHVkwxcXTaueIjaZgdxY2-F8TCxnDjQMFs5WEnzSc19CTTRA");'></div>
+</div>
+<div>
+<p class="text-gray-800 dark:text-white text-base font-medium leading-normal">Ryu</p>
+<p class="text-primary text-sm font-normal leading-normal">Opponent</p>
+</div>
+</div>
+</div>
+<div class="relative my-6 flex w-full items-center justify-center">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t-2 border-accent-gold glowing-border"></div>
+</div>
+<span class="relative bg-background-light dark:bg-background-dark px-6 text-4xl font-extrabold text-accent-gold z-10 shadow-lg" style="text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);">VS</span>
+</div>
+<div class="flex w-32 h-32 items-center justify-center rounded-full bg-accent-gold/20 border-2 border-accent-gold glowing-border">
+<div class="flex w-24 h-24 items-center justify-center rounded-full bg-accent-gold/40">
+<span class="material-symbols-outlined text-6xl text-accent-gold fill-1">swords</span>
+</div>
+</div>
+<div class="text-center mt-8">
+<p class="text-gray-800 dark:text-white text-base font-normal leading-normal">Wager: <span class="font-bold text-yellow-600 dark:text-yellow-400">100 Coins</span></p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal pt-1">Prepare for battle!</p>
+</div>
+</div>
+<div class="w-full py-4">
+<button class="h-14 w-full rounded-full bg-primary text-white font-bold text-base leading-normal shadow-lg shadow-primary/30 transition-transform duration-200 hover:scale-105 active:scale-95 bg-gradient-to-r from-yellow-600 to-yellow-800 dark:from-yellow-400 dark:to-yellow-600">
+                    Challenge!
+                </button>
+</div>
+</div>
+</div>
+</body></html>

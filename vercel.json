@@ -1,0 +1,5 @@
+{
+  "buildCommand": "pnpm install && pnpm --filter app build",
+  "installCommand": "pnpm install"
+}
+

@@ -1,0 +1,252 @@
+@import "tailwindcss";
+
+:root {
+  --background: #030617;
+  --foreground: #f0f5ff;
+  --surface: rgba(15, 23, 42, 0.6);
+  --surface-strong: rgba(15, 23, 42, 0.9);
+  --accent: #8b5cf6;
+  --accent-strong: #a855f7;
+  --font-display: var(--font-space-grotesk);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-space-grotesk);
+}
+
+body {
+  background: radial-gradient(circle at top, rgba(79, 70, 229, 0.25), transparent 50%),
+    radial-gradient(circle at 20% 20%, rgba(236, 72, 153, 0.2), transparent 45%),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-space-grotesk), "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  min-height: 100vh;
+}
+
+.glass-panel {
+  background: var(--surface);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 28px;
+  box-shadow: 0 20px 80px rgba(2, 6, 23, 0.6);
+  backdrop-filter: blur(24px);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-size: 24px;
+}
+
+.choice-button {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Bet card hover animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px 2px rgba(230, 0, 122, 0.3), 0 0 5px 1px rgba(230, 0, 122, 0.1) inset;
+  }
+  50% {
+    box-shadow: 0 0 25px 4px rgba(230, 0, 122, 0.5), 0 0 10px 2px rgba(230, 0, 122, 0.2) inset;
+  }
+}
+
+@keyframes icon-bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.1);
+  }
+}
+
+@keyframes border-glow {
+  0%, 100% {
+    border-color: rgba(230, 0, 122, 0.5);
+    box-shadow: 0 0 10px rgba(230, 0, 122, 0.2);
+  }
+  50% {
+    border-color: rgba(230, 0, 122, 1);
+    box-shadow: 0 0 20px rgba(230, 0, 122, 0.4);
+  }
+}
+
+.bet-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.bet-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(230, 0, 122, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.bet-card:hover::before {
+  left: 100%;
+}
+
+.bet-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.bet-card-icon {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bet-card:hover .bet-card-icon {
+  animation: icon-bounce 0.6s ease-in-out;
+  filter: drop-shadow(0 0 8px rgba(230, 0, 122, 0.6));
+}
+
+.bet-card-selected {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.bet-card:hover:not(.bet-card-selected) {
+  animation: border-glow 1.5s ease-in-out infinite;
+}
+
+.glowing-border {
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.6), inset 0 0 8px rgba(250, 204, 21, 0.35);
+  border-color: rgba(250, 204, 21, 0.9) !important;
+  animation: matchGlowPulse 2.2s ease-in-out infinite;
+}
+
+.match-found-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(250, 204, 21, 0.25), rgba(6, 3, 23, 0.95));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 1;
+  animation: overlayFadeIn 0.3s ease-in;
+}
+
+.match-found-overlay__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  background: rgba(12, 12, 12, 0.75);
+  border: 1px solid rgba(250, 204, 21, 0.65);
+  border-radius: 24px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 0 40px rgba(250, 204, 21, 0.35);
+  animation: matchCardPop 0.5s ease;
+}
+
+.match-found-overlay__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #fef3c7;
+  text-transform: uppercase;
+  text-shadow: 0 0 25px rgba(250, 204, 21, 0.85);
+}
+
+.match-found-overlay__subtitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #fef3c7;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(250, 204, 21, 0.75);
+}
+
+.match-found-overlay__timer {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #fbbf24;
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(250, 204, 21, 0.85);
+  margin-bottom: 0.5rem;
+  animation: matchGlowPulse 1.5s ease-in-out infinite;
+}
+
+.match-found-overlay__divider {
+  width: 180px;
+  border-top: 2px solid rgba(250, 204, 21, 0.8);
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding-top: 1rem;
+}
+
+.match-found-overlay__vs {
+  position: absolute;
+  top: -1.2rem;
+  padding: 0.35rem 1.5rem;
+  background: #111;
+  border-radius: 999px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: #fbbf24;
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.7);
+  animation: matchVsPulse 1.6s ease-in-out infinite;
+}
+
+.match-found-overlay__swords {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px solid rgba(250, 204, 21, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(250, 204, 21, 0.15);
+  animation: matchGlowPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes matchGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(250, 204, 21, 0.4), 0 0 20px rgba(250, 204, 21, 0.15) inset;
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(250, 204, 21, 0.7), 0 0 24px rgba(250, 204, 21, 0.35) inset;
+  }
+}
+
+@keyframes matchCardPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  60% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes matchVsPulse {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.08);
+  }
+}
+
+@keyframes overlayFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
