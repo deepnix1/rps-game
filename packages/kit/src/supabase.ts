@@ -9,7 +9,10 @@ export interface SupabaseClientConfig {
 }
 
 export function createSupabaseBrowserClient(config: SupabaseClientConfig) {
-  return createClient<Database>(config.url, config.anonKey, {
+  // Clean API key to remove any whitespace/newlines
+  const cleanAnonKey = config.anonKey.trim().replace(/\r\n/g, '').replace(/\n/g, '');
+  
+  return createClient<Database>(config.url, cleanAnonKey, {
     auth: {
       persistSession: true,
       detectSessionInUrl: true,
