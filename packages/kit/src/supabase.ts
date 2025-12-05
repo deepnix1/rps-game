@@ -9,8 +9,8 @@ export interface SupabaseClientConfig {
 }
 
 export function createSupabaseBrowserClient(config: SupabaseClientConfig) {
-  // Clean API key to remove any whitespace/newlines
-  const cleanAnonKey = config.anonKey.trim().replace(/\r\n/g, '').replace(/\n/g, '');
+  // Clean API key to remove any whitespace/newlines that might cause WebSocket issues
+  const cleanAnonKey = config.anonKey.trim().replace(/\r\n/g, '').replace(/\n/g, '').replace(/\r/g, '');
   
   return createClient<Database>(config.url, cleanAnonKey, {
     auth: {
@@ -18,9 +18,8 @@ export function createSupabaseBrowserClient(config: SupabaseClientConfig) {
       detectSessionInUrl: true,
     },
     realtime: {
-      params: {
-        eventsPerSecond: 10,
-      },
+      // Remove eventsPerSecond as it might cause connection issues
+      // Supabase will use default rate limiting
     },
   });
 }
