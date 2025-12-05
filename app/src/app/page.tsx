@@ -194,6 +194,11 @@ export default function Home() {
 
     // Don't retrigger if it's the same session
     if (previousSessionIdRef.current === currentSessionId) {
+      // But ensure overlay is shown if it was hidden
+      if (matchIntroStage === "hidden") {
+        setMatchIntroStage("match_found");
+        setCountdownValue(5);
+      }
       return;
     }
 

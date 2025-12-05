@@ -23,10 +23,10 @@ export function MatchSearch({
   overlayStage = "hidden",
   countdownValue = 5,
 }: MatchSearchProps) {
-  // Only show overlay if we actually have a match (isMatched prop)
-  // Don't show overlay just because overlayStage is set - it can be triggered incorrectly
-  const showOverlay = overlayStage !== "hidden" && isMatched;
-  const isMatchReady = isMatched; // Only use isMatched prop, not overlayStage
+  // Show overlay if overlayStage is set (animation triggered) OR if we have a match
+  // This ensures animations play even if there's a slight delay in isMatched prop
+  const showOverlay = overlayStage !== "hidden" || (isMatched && overlayStage === "hidden");
+  const isMatchReady = isMatched || overlayStage !== "hidden"; // Use overlayStage as fallback
 
   return (
     <div className="relative flex h-auto min-h-screen w-full flex-col bg-[#101018]">
