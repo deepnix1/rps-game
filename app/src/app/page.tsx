@@ -68,13 +68,26 @@ export default function Home() {
   };
 
   const handleBetConfirm = async () => {
+    // Rules for entering matchmaking:
+    // 1. Farcaster identity must be present
+    // 2. Bet selection must be made
+    // 3. Wallet must be connected (checked in enterQueue)
     if (!selectedBet || !hasIdentity) {
       console.error("Unable to enter queue: missing Farcaster identity or bet selection");
       return;
     }
+
+    // Wallet connection will be checked and handled in enterQueue
+    // enterQueue will attempt to connect wallet if not connected
+
     setQueueUiPending(true);
     setShowBetChoose(false);
     try {
+      // This will:
+      // 1. Check/connect wallet
+      // 2. Check/switch to correct chain
+      // 3. Enter queue with selected bet
+      // 4. Automatically show match search screen when phase becomes "queueing"
       await matchmaking.enterQueue(selectedBet);
     } catch (err) {
       console.error("Failed to enter matchmaking queue", err);

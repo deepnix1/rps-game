@@ -52,7 +52,20 @@ export function useMatchmaking({ fid }: Args) {
   const [transactionHash, setTransactionHash] = useState<string | null>(null);
   const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null);
 
-  const canQueue = Boolean(fid && walletConnected && !queueEntry && !session && phase !== "pending_tx");
+  // Rules for queuing:
+  // 1. Farcaster identity must be present
+  // 2. Wallet must be connected
+  // 3. Bet amount must be selected
+  // 4. No existing queue entry or session
+  // 5. Not in pending_tx phase
+  const canQueue = Boolean(
+    fid && 
+    walletConnected && 
+    betAmount !== null && 
+    !queueEntry && 
+    !session && 
+    phase !== "pending_tx"
+  );
 
   const enterQueue = useCallback(
     async (amount: BetAmount) => {
@@ -152,15 +165,55 @@ export function useMatchmaking({ fid }: Args) {
   useEffect(() => {
     if (!queueEntry) return;
 
-    // Set up Realtime subscription
+    // Set up Realtime subscription with Broadcast (primary) and Postgres Changes (fallback)
+    // Each player only listens to their own queue ID topic to prevent cross-player message mixing
+    // Topic format: 'queue:{queueId}' - matches the format used in database trigger
     const channel = supabase
-      .channel(`queue-${queueEntry.id}`)
+      .channel(`queue:${queueEntry.id}`, {
+        config: { private: true }, // Private channel for security
+      })
+      // Primary: Listen for Broadcast messages (faster and more reliable)
+      .on(
+        "broadcast",
+        { event: "match_found" },
+        async (payload) => {
+          if (process.env.NEXT_PUBLIC_MATCH_DEBUG === "true") {
+            console.log("[Matchmaking] Broadcast match_found received:", payload);
+          }
+          
+          const sessionId = payload.payload?.session_id as string | undefined;
+          if (!sessionId) {
+            console.error("[Matchmaking] Broadcast missing session_id");
+            return;
+          }
+
+          // Fetch full session data
+          const { data: sessionData, error: sessionError } = await supabase
+            .from("game_sessions")
+            .select()
+            .eq("id", sessionId)
+            .single();
+          
+          if (sessionError) {
+            console.error("[Matchmaking] Failed to fetch session from Broadcast:", sessionError);
+            return;
+          }
+          
+          if (sessionData) {
+            setSession(sessionData);
+            setPhase("matched");
+            // Update queue entry status
+            setQueueEntry((prev) => prev ? { ...prev, status: "matched", session_id: sessionId } : null);
+          }
+        },
+      )
+      // Fallback: Listen for Postgres Changes (in case Broadcast fails)
       .on(
         "postgres_changes",
         { event: "UPDATE", schema: "public", table: "matchmaking_queue", filter: `id=eq.${queueEntry.id}` },
         (payload) => {
           if (process.env.NEXT_PUBLIC_MATCH_DEBUG === "true") {
-            console.log("[Matchmaking] Realtime UPDATE received:", payload);
+            console.log("[Matchmaking] Postgres Changes UPDATE received (fallback):", payload);
           }
           const row = payload.new as MatchmakingQueueRow;
           setQueueEntry(row);
@@ -175,14 +228,12 @@ export function useMatchmaking({ fid }: Args) {
                 .eq("id", sessionId)
                 .single();
               if (sessionError) {
-                console.error("[Matchmaking] Failed to fetch session from Realtime:", sessionError);
-                // If session fetch fails, don't set phase to matched
+                console.error("[Matchmaking] Failed to fetch session from Postgres Changes:", sessionError);
                 setPhase("queueing");
               } else if (sessionData) {
                 setSession(sessionData);
                 setPhase("matched");
               } else {
-                // No session data, keep in queueing
                 setPhase("queueing");
               }
             })();
@@ -204,7 +255,7 @@ export function useMatchmaking({ fid }: Args) {
       // Log errors and failed subscriptions
       if (status === "SUBSCRIBED") {
         if (process.env.NEXT_PUBLIC_MATCH_DEBUG === "true") {
-          console.log("[Matchmaking] Realtime subscription successful");
+          console.log("[Matchmaking] Realtime subscription successful (Broadcast + Postgres Changes)");
         }
       } else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT" || status === "CLOSED") {
         console.error("[Matchmaking] Realtime subscription failed:", status, err);
